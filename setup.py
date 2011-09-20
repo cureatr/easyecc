@@ -24,7 +24,7 @@ if missing_modules:
 
 setup(
     name = 'easyecc',
-    description = '''A simple Crypto++ wrapper for Elliptical Curve Cryptography''',
+    description = '''A simple wrapper around Crypto++ for Elliptical Curve Cryptography''',
     version = '0.1',
     author = 'Alex Khomenko',
     author_email = 'khomenko@cs.stanford.edu',
