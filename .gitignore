@@ -1,0 +1,27 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.lock
+*.log
+*.out
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+
+# Python-specific
+*.pyc
+
+# Python-module specific
+build
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+nbproject
+thumbs.db
+
