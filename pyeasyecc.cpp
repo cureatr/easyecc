@@ -2,39 +2,26 @@
 #include <algorithm>
 #include <stdexcept>
 
-// cryptopp
-#include <cryptopp/modes.h>
-#include <cryptopp/aes.h>
-#include <cryptopp/rsa.h>
+// crypto++
 #include <cryptopp/filters.h>
 #include <cryptopp/osrng.h>
-#include <cryptopp/sha.h>
-#include <cryptopp/hmac.h>
-#include <cryptopp/base64.h>
-#include <cryptopp/hex.h>
 #include <cryptopp/default.h>
 #include <cryptopp/eccrypto.h>
 #include <cryptopp/oids.h>
-#include <cryptopp/rc5.h>
+#include <cryptopp/trunhash.h>
 
-// boost-python
+// boost
 #include <boost/python.hpp>
 #include <boost/python/tuple.hpp>
 using namespace boost::python;
 
-// cryptopp defines
-// ECP implementation is *much* faster than EC2N (~30x for encryption / decryption)
 typedef CryptoPP::ECP DefaultEC;
 
-// !!! having these as static globals makes CryptoPP barf on MacOS, hence the #defines
-//#define DefaultECParameters CryptoPP::ASN1::secp192k1()
+// having this as a static global makes CryptoPP barf on MacOS, hence the #define
 #define DefaultECParameters CryptoPP::ASN1::secp256k1()
-//const static CryptoPP::DL_GroupParameters_EC<CryptoPP::ECP> DefaultECParameters = CryptoPP::ASN1::secp192k1();
-//const static CryptoPP::DL_GroupParameters_EC<CryptoPP::ECP> DefaultECParameters = CryptoPP::ASN1::secp256k1();
 
 namespace PyEasyECC
 {
-	// 0-length hash used to reduce the size of the ECIES-encrypted value
 	class NULLHash : public CryptoPP::IteratedHashWithStaticTransform
 		<CryptoPP::word32, CryptoPP::BigEndian, 32, 0, NULLHash>
 	{
