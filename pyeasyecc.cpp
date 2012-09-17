@@ -1,3 +1,8 @@
+
+// boost
+#include <boost/python.hpp>
+#include <boost/python/tuple.hpp>
+
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
@@ -10,9 +15,7 @@
 #include <cryptopp/oids.h>
 #include <cryptopp/trunhash.h>
 
-// boost
-#include <boost/python.hpp>
-#include <boost/python/tuple.hpp>
+
 using namespace boost::python;
 
 typedef CryptoPP::ECP DefaultEC;
