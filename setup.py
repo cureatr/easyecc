@@ -1,6 +1,6 @@
 import os
 import sys
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 BOOST_LIB = 'boost_python'
 if sys.platform == 'darwin':
@@ -14,7 +14,6 @@ base_modules = [
         extra_compile_args=['-fPIC'])
 ]
 
-packages = ['easyecc']
 
 # if an extension is missing dependencies, distutils will attempt the build regardless
 modules = filter(lambda m: reduce(lambda x, y: x and os.path.exists(y), m.depends, True), base_modules)
@@ -25,6 +24,7 @@ if missing_modules:
 setup(
     name='easyecc',
     description='''A simple wrapper around Crypto++ for Elliptical Curve Cryptography''',
+    url='https://github.com/cureatr/easyecc',
     version='0.1',
     author='Alex Khomenko',
     author_email='khomenko@cs.stanford.edu',
