@@ -1,31 +1,28 @@
+from __future__ import print_function
 import os
-import sys
+import functools
 from setuptools import setup, Extension
-
-BOOST_LIB = 'boost_python'
-if sys.platform == 'darwin':
-    BOOST_LIB = 'boost_python-mt'
 
 base_modules = [
     Extension('_easyecc', [
         'pyeasyecc.cpp',
         ],
-        libraries=['cryptopp', BOOST_LIB],
+        libraries=['cryptopp'],
         extra_compile_args=['-fPIC'])
 ]
 
 
 # if an extension is missing dependencies, distutils will attempt the build regardless
-modules = filter(lambda m: reduce(lambda x, y: x and os.path.exists(y), m.depends, True), base_modules)
-missing_modules = filter(lambda m: m not in modules, base_modules)
+modules = [m for m in base_modules if functools.reduce(lambda x, y: x and os.path.exists(y), m.depends, True)]
+missing_modules = [m for m in base_modules if m not in modules]
 if missing_modules:
-    print 'WARNING: Some Python modules are missing dependencies: %s' % ', '.join(map(lambda x: x.name, missing_modules))
+    print('WARNING: Some Python modules are missing dependencies: %s' % ', '.join(map(lambda x: x.name, missing_modules)))
 
 setup(
     name='easyecc',
     description='''A simple wrapper around Crypto++ for Elliptical Curve Cryptography''',
     url='https://github.com/cureatr/easyecc',
-    version='0.2',
+    version='0.3',
     author='Alex Khomenko',
     author_email='khomenko@cs.stanford.edu',
     ext_modules=modules,

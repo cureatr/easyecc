@@ -1,10 +1,11 @@
+from __future__ import print_function
 import _easyecc
 
 
 class ECC(object):
-    def __init__(self, *args, **kwargs):
-        self._private_key = kwargs.get('private_key')
-        self._public_key = kwargs.get('public_key')
+    def __init__(self, private_key=None, public_key=None):
+        self._private_key = private_key
+        self._public_key = public_key
 
     @classmethod
     def new_key(cls):
@@ -17,8 +18,9 @@ class ECC(object):
     def decrypt(self, ciphertext):
         return _easyecc.decrypt(self._private_key, ciphertext)
 
+
 if __name__ == "__main__":
-    plaintext = "This is a big secret"
-    print plaintext
+    plaintext = b"This is a big secret"
+    print(plaintext)
     ecc = ECC.new_key()
-    print ecc.decrypt(ecc.encrypt(plaintext))
+    print(ecc.decrypt(ecc.encrypt(plaintext)))
