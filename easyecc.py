@@ -1,5 +1,8 @@
-from __future__ import print_function
+import warnings
 import _easyecc
+
+if _easyecc.CRYPTOPP_VERSION > 564 and _easyecc.CRYPTOPP_VERSION <= 820:
+    warnings.warn(f"libcryptopp {_easyecc.CRYPTOPP_VERSION} is a known buggy version, see https://github.com/weidai11/cryptopp/issues/856")
 
 
 class ECC(object):
@@ -23,4 +26,6 @@ if __name__ == "__main__":
     plaintext = b"This is a big secret"
     print(plaintext)
     ecc = ECC.new_key()
-    print(ecc.decrypt(ecc.encrypt(plaintext)))
+    ciphertext = ecc.encrypt(plaintext)
+    print(ciphertext)
+    print(ecc.decrypt(ciphertext))

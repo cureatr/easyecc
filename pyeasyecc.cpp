@@ -5,6 +5,9 @@
 #include <cryptopp/eccrypto.h>
 #include <cryptopp/oids.h>
 
+#if CRYPTOPP_VERSION >= 600
+#define byte CryptoPP::byte
+#endif
 
 #if PY_MAJOR_VERSION >= 3
 #define TWO_BUFFERS_FORMAT "y#y#"
@@ -270,6 +273,7 @@ init_easyecc(void)
     }
     Py_INCREF(st->error);
     PyModule_AddObject(module, "EasyECCError", st->error);
+    PyModule_AddIntConstant(module, "CRYPTOPP_VERSION", CRYPTOPP_VERSION);
 
 #if PY_MAJOR_VERSION >= 3
     return module;
