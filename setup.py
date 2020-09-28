@@ -16,7 +16,7 @@ setup(
     name='easyecc',
     description='''A simple wrapper around Crypto++ for Elliptical Curve Cryptography''',
     url='https://github.com/cureatr/easyecc',
-    version='0.4',
+    version='0.5',
     author='Alex Khomenko',
     author_email='khomenko@cs.stanford.edu',
     ext_modules=modules,
