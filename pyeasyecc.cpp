@@ -126,7 +126,7 @@ static PyObject *
 ECC_encrypt(PyObject *self, PyObject *args)
 {
     const char *_public_key, *_data_decrypted;
-    int _public_key_size, _data_decrypted_size;
+    Py_ssize_t _public_key_size, _data_decrypted_size;
     if (!PyArg_ParseTuple(args, TWO_BUFFERS_FORMAT, &_public_key, & _public_key_size, &_data_decrypted, &_data_decrypted_size))
         return NULL;
 
@@ -173,7 +173,7 @@ static PyObject *
 ECC_decrypt(PyObject *self, PyObject *args)
 {
     const char *_private_key, *_data_encrypted;
-    int _private_key_size, _data_encrypted_size;
+    Py_ssize_t _private_key_size, _data_encrypted_size;
     if (!PyArg_ParseTuple(args, TWO_BUFFERS_FORMAT, &_private_key, & _private_key_size, &_data_encrypted, &_data_encrypted_size))
         return NULL;
 
